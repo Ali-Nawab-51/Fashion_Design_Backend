@@ -1,0 +1,50 @@
+const register = require('../controllers/register.controller')
+const login = require('../controllers/login.controller')
+const forgetPassword = require("../controllers/forgetPassword")
+const verifyOtp = require("../controllers/verifyOtp.controller")
+const getOtpTime = require("../controllers/getOtpTime")
+const updatePassword = require("../controllers/updatePassword.controller")
+const getAccess = require("../controllers/getAccess.controller")
+const upload = require("../Middlewares/uploadMiddleware");
+const addProduct = require("../controllers/products.controller")
+const allProducts = require("../controllers/allProducts.controller")
+const singleProduct = require("../controllers/singleProduct.controller")
+const addToCart = require("../controllers/addToCart.controller")
+const removeFromCart = require("../controllers/removeFromCart.controller")
+const clearCart = require("../controllers/clearCart.controller")
+const fetchSingleProduct = require('../controllers/fetchSingleUserCartData.controller');
+const getUsers = require("../controllers/getUsers.controller")
+const deleteComment = require("../controllers/deleteComment.controller")
+const addComment = require("../controllers/addComment.controller")
+const orderStatus = require("../controllers/orderStatus.controller")
+const getSpecificUser = require("../controllers/specificUser.controller")
+const stripeIntegration = require("../controllers/stripeIntegration.controller")
+const updatedSpecificUser = require("../controllers/updateUser.controller")
+const showPurchasedItems = require("../controllers/showPurchasedItems.controller")
+const express = require('express');
+const router = express.Router();
+
+router.post('/register', upload.single('image'), register);
+router.post('/login', login);
+router.post('/forget/password', forgetPassword)
+router.post('/verify/otp', verifyOtp)
+router.post('/otp/time', getOtpTime)
+router.post('/update/password', updatePassword)
+router.post('/getAccess', getAccess)
+router.post("/add/product", upload.single('image'), addProduct)
+router.get("/all/products", allProducts)
+router.get("/all/products/:id", singleProduct)
+router.post('/addToCart', addToCart)
+router.post('/remove/cart', removeFromCart)
+router.get('/cart/:userId', fetchSingleProduct)
+router.post('/clearCart', clearCart)
+router.get('/get/users', getUsers)
+router.post('/delete/comment', deleteComment)
+router.post('/add/comment', addComment)
+router.post("/order/status", orderStatus)
+router.get("/user/:userId", getSpecificUser)
+router.post("/create-checkout-session", stripeIntegration)
+router.put("/update/user/:userId", updatedSpecificUser)
+router.get("/purchased/items/user/:userId", showPurchasedItems)
+
+module.exports = router;
